@@ -1,0 +1,152 @@
+﻿@model AplicacaoTestePacienteCore.Models.Paciente
+@{
+    ViewData["Title"] = "Criar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row" style="width:100%">
+    <div class="col-6">
+        <h2 class="text-primary">Lista de Pacientes</h2>
+    </div>
+    <div class="col-4 text-right">
+        <button type="button" onclick="limpar()" class="btn btn-info form-control" data-toggle="modal" data-target="#myModal">Criar Novo Paciente</button>
+    </div>
+</div>
+
+<div class="p-4 border rounded bg-light">
+    <table id="tblData" class="table table-bordered table-responsive-xl" style="width:100%">
+        <thead class="thead-dark">
+            <tr class="table-info">
+                <th>Prontuario</th>
+                <th>Nome</th>
+                <th>Sobrenome</th>
+                <th>DataNascimento</th>
+                <th>Genero</th>
+                <th>CPF</th>
+                <th>Email</th>
+                <th>Celular</th>
+                <th>TelFixo</th>
+                <th>Convenio</th>
+                <th>Carterinha</th>
+                <th>Validade</th>
+                <th>Estado</th>
+                <th></th>
+            </tr>
+        </thead>
+    </table>
+</div>
+
+@*Modal*@
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog modal-xl modal-dialog-centered">
+        <div class="modal-content">
+            <form method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h2 class="modal-title text-primary text-center">Ingresso de Pacientes</h2>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div style="padding-left:15%; padding-right:15%;padding-bottom:30px;">
+                        <div class="row p-3 border-0">
+                            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        </div>
+                        <input type="hidden" id="pacienteId" asp-for="Id" />
+
+                        <div class="form-row" style="padding-top:10px;">
+                            <div class="form-group col-md-6">
+                                <label>Prontuarios</label>
+                                <input asp-for="Prontuario" id="pacienteProntuario" class="form-control" placeholder="Prontuarios" />
+                                <span asp-validation-for="Prontuario" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row padding-top:10px;">
+                            <div class="form-group col-md-4">
+                                <label>Nome</label>
+                                <input asp-for="Nome" id="pacienteNome" class="form-control" placeholder="Nome" />
+                                <span asp-validation-for="Nome" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Sobrenome</label>
+                                <input asp-for="Sobrenome" id="pacienteSobrenome" class="form-control" placeholder="Sobrenome" />
+                                <span asp-validation-for="Sobrenome" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Data de nascimento</label>
+                                <input asp-for="DataNascimento" id="pacienteDataNascimento" class="form-control" placeholder="Data de nascimento" />
+                                <span asp-validation-for="DataNascimento" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row padding-top:10px;">
+                            <div class="form-group col-md-4">
+                                <label>Genero</label>
+                                <input asp-for="Genero" id="pacienteGenero" class="form-control" placeholder="Genero" />
+                                <span asp-validation-for="Genero" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>CPF</label>
+                                <input asp-for="CPF" class="form-control" id="pacienteCPF" placeholder="CPF" />
+                                <span asp-validation-for="CPF" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>E-mail</label>
+                                <input asp-for="Email" class="form-control" id="pacienteEmail" placeholder="email" />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row padding-top:10px;">
+                            <div class="form-group col-md-4">
+                                <label>Celular</label>
+                                <input asp-for="Celular" class="form-control" id="pacienteCelular" placeholder="Celular" />
+                                <span asp-validation-for="Celular" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Telefone Fixo</label>
+                                <input asp-for="TelFixo" class="form-control" id="pacienteTelFixo" placeholder="Telefone Fixo" />
+                                <span asp-validation-for="TelFixo" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Convenio</label>
+                                <input asp-for="Convenio" class="form-control" id="pacienteConvenio" placeholder="Convenio" />
+                                <span asp-validation-for="Convenio" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="form-row padding-top:10px;">
+                            <div class="form-group col-md-4">
+                                <label>Carterinha do convenio</label>
+                                <input asp-for="Carterinha" class="form-control" id="pacienteCarterinha" placeholder="Carterinha do convenio" />
+                                <span asp-validation-for="Carterinha" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Validade</label>
+                                <input asp-for="Validade" class="form-control" id="pacienteValidade" placeholder="Validade" />
+                                <span asp-validation-for="Validade" class="text-danger"></span>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label>Estado</label>
+                                <select asp-for="Estado" id="pacienteEstado" class="form-control">
+                                    <option value="true">Ativo</option>
+                                    <option value="false">Inativo</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">Fechar</button>
+                    <button type="submit" class="btn btn-success">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/paciente.js"></script>
+}
+
+
